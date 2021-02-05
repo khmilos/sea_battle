@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
