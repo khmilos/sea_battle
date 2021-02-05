@@ -3,6 +3,7 @@ import {
   ContextDispatch,
   ContextState,
   EXPAND_SHIP,
+  GameStage,
   MERGE_SHIPS,
   NEW_SHIP,
   REMOVE_SHIP,
@@ -15,6 +16,8 @@ export function handleGridClick(
   state: ContextState
 ){
   return (cell: Cell) => {
+    if (state.gameStage !== GameStage.ShipsPlacement) return;
+
     const { shipList } = state.playerGrid
     const index = findShip(shipList, cell);
     

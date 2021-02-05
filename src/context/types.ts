@@ -8,7 +8,12 @@ export interface GameGridState {
   hitList: Cell[];
 }
 
+export enum GameStage {
+  ShipsPlacement,
+}
+
 export interface ContextState {
+  gameStage: GameStage;
   playerGrid: GameGridState;
 }
 

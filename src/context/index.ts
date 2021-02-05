@@ -1,8 +1,9 @@
 import { createContext } from 'react';
-import { ContextValue } from './types';
+import { ContextValue, GameStage } from './types';
 
 const initContext: ContextValue = {
   state: {
+    gameStage: GameStage.ShipsPlacement,
     playerGrid: {
       shipList: [],
       missList: [],
