@@ -1,0 +1,24 @@
+{ 
+  "basic": {
+    "carrier": {
+      "name": "Carrier",
+      "size": 4,
+      "quantity": 1
+    },
+    "battleship": {
+      "name": "Battleship",
+      "size": 3,
+      "quantity": 2
+    },
+    "destroyer": {
+      "name": "Battleship",
+      "size": 2,
+      "quantity": 3
+    },
+    "submarine": {
+      "name": "Battleship",
+      "size": 1,
+      "quantity": 4
+    }
+  }
+}

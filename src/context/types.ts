@@ -12,7 +12,20 @@ export enum GameStage {
   ShipsPlacement,
 }
 
+export interface GameSettings {
+  name: string;
+  maxSize: number;
+  shipTypes: {
+    [shipName: string]: {
+      name: string;
+      size: number;
+      quantity: number;
+    };
+  };
+}
+
 export interface ContextState {
+  gameSettings: GameSettings;
   gameStage: GameStage;
   playerGrid: GameGridState;
 }

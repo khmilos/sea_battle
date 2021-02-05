@@ -1,8 +1,14 @@
 import { createContext } from 'react';
 import { ContextValue, GameStage } from './types';
+import settingsData from './settings.json';
 
 const initContext: ContextValue = {
   state: {
+    gameSettings: {
+      name: 'basic',
+      maxSize: 4,
+      shipTypes: settingsData['basic'],
+    },
     gameStage: GameStage.ShipsPlacement,
     playerGrid: {
       shipList: [],

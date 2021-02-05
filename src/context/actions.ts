@@ -43,7 +43,7 @@ export function handleGridClick(
     switch (indices.length) {
       case 0: return dispatch({ type: NEW_SHIP, payload: { cell} });
       case 1: {
-        if (shipList[indices[0]].length >= 4) {
+        if (shipList[indices[0]].length >= state.gameSettings.maxSize) {
           return Error('Maximum length of ship');
         }
         return dispatch({
@@ -55,7 +55,7 @@ export function handleGridClick(
         const length = shipList[indices[0]].length
           + shipList[indices[1]].length
           + 1;
-        if (length > 4) {
+        if (length > state.gameSettings.maxSize) {
           return Error('Maximum length of merged ship');
         }
         return dispatch({
