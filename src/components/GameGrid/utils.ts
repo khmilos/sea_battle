@@ -5,6 +5,7 @@ export function getClass(cell: CellType) {
   switch (cell) {
     case CellType.Empty: return styles.empty;
     case CellType.Ship: return styles.ship;
+    case CellType.Unknown: return styles.unkown;
     default: return styles.empty;
   }
 }

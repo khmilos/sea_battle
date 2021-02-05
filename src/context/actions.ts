@@ -4,6 +4,7 @@ import {
   ContextState,
   EXPAND_SHIP,
   GameStage,
+  GridKey,
   MERGE_SHIPS,
   NEW_SHIP,
   REMOVE_SHIP,
@@ -13,9 +14,11 @@ import { findAdjacentShips, findShip, isDiagonallyAdjacent } from './utils';
 
 export function handleGridClick(
   dispatch: ContextDispatch,
-  state: ContextState
+  state: ContextState,
+  gridKey: GridKey
 ){
   return (cell: Cell) => {
+    if (gridKey === 'opponentGrid') return;
     if (state.gameStage !== GameStage.ShipsPlacement) return;
 
     const { shipList } = state.playerGrid

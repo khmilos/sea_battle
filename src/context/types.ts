@@ -8,6 +8,8 @@ export interface GameGridState {
   hitList: Cell[];
 }
 
+export type GridKey = 'playerGrid' | 'opponentGrid';
+
 export enum GameStage {
   ShipsPlacement,
 }
@@ -28,6 +30,7 @@ export interface ContextState {
   gameSettings: GameSettings;
   gameStage: GameStage;
   playerGrid: GameGridState;
+  opponentGrid: GameGridState;
 }
 
 export type ContextDispatch = (action: ContextActionType) => void;

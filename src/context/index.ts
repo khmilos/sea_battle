@@ -15,6 +15,11 @@ const initContext: ContextValue = {
       missList: [],
       hitList: [],
     },
+    opponentGrid: {
+      shipList: [],
+      missList: [],
+      hitList: [],
+    },
   },
   dispatch: (action) => {},
 };

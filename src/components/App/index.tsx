@@ -11,7 +11,7 @@ function App() {
           <GameGrid gridKey='playerGrid' />
         </section>
         <section className={styles.grid}>
-          <GameGrid gridKey='playerGrid' />
+          <GameGrid gridKey='opponentGrid' />
         </section>
       </main>
       <aside className={styles.board}>
