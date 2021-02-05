@@ -7,7 +7,7 @@ const initContext: ContextValue = {
     gameSettings: {
       name: 'basic',
       maxSize: 4,
-      shipTypes: settingsData['basic'],
+      shipTypeList: settingsData['basic'],
     },
     gameStage: GameStage.ShipsPlacement,
     playerGrid: {

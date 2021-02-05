@@ -15,7 +15,7 @@ export enum GameStage {
 export interface GameSettings {
   name: string;
   maxSize: number;
-  shipTypes: {
+  shipTypeList: {
     [shipName: string]: {
       name: string;
       size: number;
