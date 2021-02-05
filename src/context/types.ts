@@ -15,15 +15,17 @@ export enum GameStage {
   WaitingOpponent,
 }
 
+export interface ShipType {
+  name: string;
+  size: number;
+  quantity: number;
+}
+
 export interface GameSettings {
   name: string;
   maxSize: number;
   shipTypeList: {
-    [shipName: string]: {
-      name: string;
-      size: number;
-      quantity: number;
-    };
+    [shipName: string]: ShipType;
   };
 }
 
@@ -85,7 +87,7 @@ interface SplitShipAction extends Action {
 interface MergeShipsAction extends Action {
   type: typeof MERGE_SHIPS;
   payload: {
-    indices: [number, number];
+    indices: number[];
     cell: Cell;
   };
 }

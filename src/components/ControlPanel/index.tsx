@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import context from 'context';
-import { play } from 'context/actions';
-import { CLEAR_SHIPS } from 'context/types';
+import { play, clear } from 'context/actions';
 import styles from './styles.module.css';
 
 function ControlPanel() {
@@ -16,7 +15,7 @@ function ControlPanel() {
       </button>
       <button
         className={`${styles.button} ${styles.reset}`}
-        onClick={() => dispatch({ type: CLEAR_SHIPS })}
+        onClick={() => clear(dispatch, state)()}
       >
         RESET
       </button>
