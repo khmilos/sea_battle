@@ -22,7 +22,10 @@ function reducer (state: ContextState, action: ContextActionType) {
       const { index, cell } = action.payload;
       const ship: Ship = [...state.playerGrid.shipList[index], cell]
         .sort((a, b) => a[0] + a[1] - b[0] - b[1]);
-      const shipList = [...state.playerGrid.shipList, ship];
+      const shipList = [
+        ...state.playerGrid.shipList.filter((_, i) => i !== index),
+        ship,
+      ];
       return { ...state, playerGrid: { ...state.playerGrid, shipList } };
     }
     case REMOVE_SHIP: {
