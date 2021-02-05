@@ -1,6 +1,11 @@
+import React from 'react';
+import GameGrid from 'components/GameGrid';
+
 function App() {
   return (
-    <div></div>
+    <div>
+      <GameGrid gridKey='playerGrid' />
+    </div>
   );
 }
 
