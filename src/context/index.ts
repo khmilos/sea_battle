@@ -2,7 +2,13 @@ import { createContext } from 'react';
 import { ContextValue } from './types';
 
 const initContext: ContextValue = {
-  state: { },
+  state: {
+    playerGrid: {
+      shipList: [],
+      missList: [],
+      hitList: [],
+    },
+  },
   dispatch: (action) => {},
 };
 
