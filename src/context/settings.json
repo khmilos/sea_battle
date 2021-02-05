@@ -11,12 +11,12 @@
       "quantity": 2
     },
     "destroyer": {
-      "name": "Battleship",
+      "name": "Destroyer",
       "size": 2,
       "quantity": 3
     },
     "submarine": {
-      "name": "Battleship",
+      "name": "Submarine",
       "size": 1,
       "quantity": 4
     }
