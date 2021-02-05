@@ -7,6 +7,7 @@ import {
   GridKey,
   MERGE_SHIPS,
   NEW_SHIP,
+  PLAYER_READY,
   REMOVE_SHIP,
   SHRINK_SHIP
 } from './types';
@@ -68,5 +69,28 @@ export function handleGridClick(
       }
       default: return Error('Error state');
     }
+  }
+}
+
+export function play(
+  dispatch: ContextDispatch,
+  state: ContextState
+) {
+  return () => {
+    if (state.gameStage === GameStage.WaitingOpponent) return;
+    // Validation
+    const { shipList } = state.playerGrid;
+    const quantity = shipList
+      .map((ship) => ship.length)
+      .reduce<{ [key: number] : number}>((result, length) => {
+        return { ...result, [length]: (result[length] || 0) + 1 };
+      }, {});
+    const shipTypeList = Object.values(state.gameSettings.shipTypeList);
+    const isValid = shipTypeList.reduce((result, shipType) => {
+      return result && quantity[shipType.size] === shipType.quantity;
+    }, true);
+    if (!isValid) return;
+
+    dispatch({ type: PLAYER_READY });
   }
 }

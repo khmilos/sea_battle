@@ -2,12 +2,14 @@ import {
   ContextState,
   ContextActionType,
   Ship,
+  GameStage,
   CLEAR_SHIPS,
   NEW_SHIP,
   EXPAND_SHIP,
   REMOVE_SHIP,
   SHRINK_SHIP,
   MERGE_SHIPS,
+  PLAYER_READY,
 } from './types';
 
 function reducer (state: ContextState, action: ContextActionType) {
@@ -60,6 +62,9 @@ function reducer (state: ContextState, action: ContextActionType) {
         ...state,
         playerGrid: { ...state.playerGrid, shipList: [] },
       };
+    }
+    case PLAYER_READY: {
+      return { ...state, gameStage: GameStage.WaitingOpponent };
     }
     default: return state;
   }

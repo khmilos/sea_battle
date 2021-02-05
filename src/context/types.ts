@@ -12,6 +12,7 @@ export type GridKey = 'playerGrid' | 'opponentGrid';
 
 export enum GameStage {
   ShipsPlacement,
+  WaitingOpponent,
 }
 
 export interface GameSettings {
@@ -93,9 +94,16 @@ interface ClearShipsAction extends Action {
   type: typeof CLEAR_SHIPS;
 }
 
+export const PLAYER_READY = 'PLAYER_READY';
+
+interface PlayerReadyAction extends Action {
+  type: typeof PLAYER_READY;
+}
+
 export type ContextActionType = NewShipAction
   | ExpandShipAction
   | RemoveShipAction
   | SplitShipAction
   | MergeShipsAction
-  | ClearShipsAction;
+  | ClearShipsAction
+  | PlayerReadyAction;

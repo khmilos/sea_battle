@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
 import context from 'context';
+import { play } from 'context/actions';
 import { CLEAR_SHIPS } from 'context/types';
 import styles from './styles.module.css';
 
 function ControlPanel() {
-  const { dispatch } = useContext(context);
+  const { state, dispatch } = useContext(context);
   return (
     <div className={styles.container}>
-      <button className={`${styles.button} ${styles.play}`}>
+      <button
+        className={`${styles.button} ${styles.play}`}
+        onClick={() => play(dispatch, state)()}
+      >
         PLAY
       </button>
       <button
