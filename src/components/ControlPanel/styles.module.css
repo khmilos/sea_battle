@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
+.container > * {
+  margin-bottom: 15px;
+}
+
+.container > *:last-child {
+  margin-bottom: 0;
+}
+
+.button {
+  padding: 0 15px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 15px;
+  font-size: 18px;
+}
+
+.button:active {
+  opacity: .5;
+}
+
+.play {
+  background: greenyellow;
+}
+
+.reset {
+  background: rosybrown;
+}
