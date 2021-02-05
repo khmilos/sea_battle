@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+}
+
+.gridWrapper {
+  display: flex;
+}
+
+.grid {
+  padding: 15px;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  padding: 15px;
+  width: 400px;
+}
