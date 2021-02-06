@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 
 import context from 'context';
 import { gridClick } from 'context/actions';
-import { GridKey } from 'context/types';
+import { GameStage, GridKey } from 'context/types';
 
 import { initGrid, getClass } from './utils';
 import styles from './styles.module.css';
 
 function GameGrid({ gridKey }: { gridKey: GridKey }) {
   const { state, dispatch } = useContext(context);
+  const { gameStage } = state;
   const handleClick = gridClick(dispatch, state, gridKey);
   const grid = initGrid(state[gridKey].shipList, gridKey);
   return (
@@ -21,6 +22,7 @@ function GameGrid({ gridKey }: { gridKey: GridKey }) {
                 <button
                   className={`${styles.cell} ${getClass(cell)}`}
                   onClick={() => handleClick([i, j])}
+                  disabled={gameStage !== GameStage.ShipsPlacement}
                 >
                 </button>
               </td>
