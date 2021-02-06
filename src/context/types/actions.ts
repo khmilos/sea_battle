@@ -1,58 +1,16 @@
-export type Cell = [number, number];
+import { Cell } from './state';
 
-export type Ship = Cell[];
-
-export interface GameGridState {
-  shipList: Ship[];
-  missList: Cell[];
-  hitList: Cell[];
+interface Action {
+  type: string;
 }
 
-export type GridKey = 'playerGrid' | 'opponentGrid';
-
-export enum GameStage {
-  ShipsPlacement,
-  WaitingOpponent,
-}
-
-export interface ShipType {
-  name: string;
-  size: number;
-  quantity: number;
-}
-
-export interface GameSettings {
-  name: string;
-  maxSize: number;
-  shipTypeList: {
-    [shipName: string]: ShipType;
-  };
-}
-
-export interface ContextState {
-  gameSettings: GameSettings;
-  gameStage: GameStage;
-  playerGrid: GameGridState;
-  opponentGrid: GameGridState;
-}
-
-export type ContextDispatch = (action: ContextActionType) => void;
-
-export interface ContextValue {
-  state: ContextState;
-  dispatch: ContextDispatch;
-}
-
+// Ship placement actions
 export const NEW_SHIP = 'NEW_SHIP';
 export const EXPAND_SHIP = 'EXPAND_SHIP';
 export const REMOVE_SHIP = 'REMOVE_SHIP';
 export const SHRINK_SHIP = 'SHRINK_SHIP';
 export const MERGE_SHIPS = 'MERGE_SHIPS';
 export const CLEAR_SHIPS = 'CLEAR_SHIPS';
-
-interface Action {
-  type: string;
-}
 
 interface NewShipAction extends Action {
   type: typeof NEW_SHIP;
@@ -96,6 +54,7 @@ interface ClearShipsAction extends Action {
   type: typeof CLEAR_SHIPS;
 }
 
+// Stage change action
 export const PLAYER_READY = 'PLAYER_READY';
 
 interface PlayerReadyAction extends Action {
