@@ -3,6 +3,7 @@ import {
   ContextActionType,
   Ship,
   GameStage,
+  CurrentMove,
   CLEAR_SHIPS,
   NEW_SHIP,
   EXPAND_SHIP,
@@ -10,6 +11,8 @@ import {
   SHRINK_SHIP,
   MERGE_SHIPS,
   PLAYER_READY,
+  PLAYER_MADE_MOVE,
+  PLAYER_MOVE_RESPONSE,
 } from './types';
 
 function reducer (state: ContextState, action: ContextActionType) {
@@ -65,6 +68,15 @@ function reducer (state: ContextState, action: ContextActionType) {
     }
     case PLAYER_READY: {
       return { ...state, gameStage: GameStage.Game };
+    }
+    case PLAYER_MADE_MOVE: {
+      return { ...state, currentMove: CurrentMove.Waiting };
+    }
+    case PLAYER_MOVE_RESPONSE: {
+      if (action.payload.isHit) {
+        return { ...state, currentMove: CurrentMove.Player };
+      }
+      return { ...state, currentMove: CurrentMove.Opponent };
     }
     default: return state;
   }

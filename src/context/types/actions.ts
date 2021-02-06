@@ -62,18 +62,26 @@ interface PlayerReadyAction extends Action {
 }
 
 // Moves
-export const PLAYER_MOVE = 'PLAYER_MOVE';
-export const OPPONENT_MOVE = 'OPPONENT_MOVE';
+export const PLAYER_MADE_MOVE = 'PLAYER_MADE_MOVE';
+export const PLAYER_MOVE_RESPONSE = 'PLAYER_MOVE_RESPONSE';
+export const OPPONENT_MADE_MOVE = 'OPPONENT_MADE_MOVE';
 
-interface PlayerMoveAction {
-  type: typeof PLAYER_MOVE;
+interface PlayerMadeMoveAction {
+  type: typeof PLAYER_MADE_MOVE;
   payload: {
     cell: Cell;
   };
 }
 
-interface OpponentMoveAction {
-  type: typeof OPPONENT_MOVE;
+interface PlayerMoveResponseAction {
+  type: typeof PLAYER_MOVE_RESPONSE;
+  payload: {
+    isHit: boolean;
+  };
+}
+
+interface OpponentMadeMoveAction {
+  type: typeof OPPONENT_MADE_MOVE;
   payload: {
     cell: Cell;
   };
@@ -86,5 +94,6 @@ export type ContextActionType = NewShipAction
   | MergeShipsAction
   | ClearShipsAction
   | PlayerReadyAction
-  | PlayerMoveAction
-  | OpponentMoveAction;
+  | PlayerMadeMoveAction
+  | PlayerMoveResponseAction
+  | OpponentMadeMoveAction;

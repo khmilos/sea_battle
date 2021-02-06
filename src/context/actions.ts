@@ -1,5 +1,4 @@
 import { acceptMove, makeMove } from 'aiEmulation';
-
 import {
   Cell,
   ContextDispatch,
@@ -15,7 +14,8 @@ import {
   REMOVE_SHIP,
   SHRINK_SHIP,
   CLEAR_SHIPS,
-  ContextActionType
+  ContextActionType,
+  CurrentMove
 } from './types';
 import { findAdjacentShips, findShip, isDiagonallyAdjacent } from './utils';
 
@@ -80,6 +80,10 @@ function playerMove(cell: Cell) {
   return console.log('MISS')
 }
 
+function aiMove() {
+  return makeMove();
+}
+
 export function gridClick(
   dispatch: ContextDispatch,
   state: ContextState,
@@ -103,10 +107,13 @@ export function gridClick(
     }
   }
 
-  if (gameStage !== GameStage.Game) {
+  const { currentMove } = state;
+  if (gameStage !== GameStage.Game || currentMove !== CurrentMove.Opponent) {
     return () => {};
   }
-  return (cell: Cell) => { playerMove(cell) };
+  return (cell: Cell) => {
+    playerMove(cell);
+  };
 }
 
 export function clear(dispatch: ContextDispatch, state: ContextState) {
