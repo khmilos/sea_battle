@@ -12,6 +12,10 @@ function GameGrid({ gridKey }: { gridKey: GridKey }) {
   const { gameStage } = state;
   const handleClick = gridClick(dispatch, state, gridKey);
   const grid = initGrid(state[gridKey].shipList, gridKey);
+  const isDisabled = (!(
+    (gridKey === 'playerGrid' && gameStage === GameStage.ShipsPlacement)
+    || (gridKey === 'opponentGrid' && gameStage === GameStage.Game)
+  ));
   return (
     <table className={styles.table}>
       <tbody>
@@ -22,7 +26,7 @@ function GameGrid({ gridKey }: { gridKey: GridKey }) {
                 <button
                   className={`${styles.cell} ${getClass(cell)}`}
                   onClick={() => handleClick([i, j])}
-                  disabled={gameStage !== GameStage.ShipsPlacement}
+                  disabled={isDisabled}
                 >
                 </button>
               </td>
