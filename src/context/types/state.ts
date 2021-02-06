@@ -21,6 +21,7 @@ export type GridKey = 'playerGrid' | 'opponentGrid';
 export enum GameStage {
   ShipsPlacement,
   WaitingOpponent,
+  Game,
 }
 
 export interface GameSettings {
@@ -31,11 +32,19 @@ export interface GameSettings {
   };
 }
 
+export enum CurrentMove {
+  Player,
+  Waiting,
+  Opponent,
+  Neither,
+}
+
 export interface ContextState {
   gameSettings: GameSettings;
   gameStage: GameStage;
   playerGrid: GameGridState;
   opponentGrid: GameGridState;
+  currentMove: CurrentMove;
 }
 
 export type ContextDispatch = (action: ContextActionType) => void;

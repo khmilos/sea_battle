@@ -64,7 +64,7 @@ function reducer (state: ContextState, action: ContextActionType) {
       };
     }
     case PLAYER_READY: {
-      return { ...state, gameStage: GameStage.WaitingOpponent };
+      return { ...state, gameStage: GameStage.Game };
     }
     default: return state;
   }

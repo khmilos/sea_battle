@@ -1,3 +1,5 @@
+import { acceptMove, makeMove } from 'aiEmulation';
+
 import {
   Cell,
   ContextDispatch,
@@ -17,75 +19,94 @@ import {
 } from './types';
 import { findAdjacentShips, findShip, isDiagonallyAdjacent } from './utils';
 
-function removeShip(
+type Either<T, U> = [T, null] | [null, U];
+
+function createRemoveAction(
   shipList: Ship[],
+  cell: Cell,
   index: number,
-   cell: Cell,
-): ContextActionType | Error {
+): Either<Error, ContextActionType> {
   if (shipList[index].length === 1) {
-    return { type: REMOVE_SHIP, payload: { index } };
+    return [null, { type: REMOVE_SHIP, payload: { index } }];
   }
-  const cellIndex = shipList[index].findIndex((x) => {
-    return x[0] === cell[0] && x[1] === cell[1];
+
+  const cellIndex = shipList[index].findIndex((item) => {
+    return item[0] === cell[0] && item[1] === cell[1];
   });
-  return { type: SHRINK_SHIP, payload: { shipIndex: index, cellIndex } };
+
+  const action: ContextActionType = {
+    type: SHRINK_SHIP,
+    payload: { shipIndex: index, cellIndex },
+  };
+  return [null, action];
 }
 
-function addShip(
+function createAddAction(
   shipList: Ship[],
   cell: Cell,
   maxSize: number,
-): ContextActionType | Error {
+): Either<Error, ContextActionType> {
   if (isDiagonallyAdjacent(shipList, cell)) {
-    return Error('Diagonally adjacent');
+    return [Error('Diagonally adjacent'), null];
   }
 
   const indices = findAdjacentShips(shipList, cell);
 
   switch (indices.length) {
-    case 0: return { type: NEW_SHIP, payload: { cell} };
+    case 0: return [null, { type: NEW_SHIP, payload: { cell} }];
     case 1: {
       const index = indices[0];
       if (shipList[index].length >= maxSize) {
-        return Error('Maximum length of ship');
+        return [Error('Maximum length of ship'), null];
       }
-      return { type: EXPAND_SHIP, payload: { index, cell } };
+      return [null, { type: EXPAND_SHIP, payload: { index, cell } }];
     }
     case 2: {
       const length = shipList[indices[0]].length + shipList[indices[1]].length;
       if (length > maxSize - 1) {
-        return Error('Maximum length of merged ship');
+        return [Error('Maximum length of merged ship'), null];
       }
-      return { type: MERGE_SHIPS, payload: { indices, cell } };
+      return [null, { type: MERGE_SHIPS, payload: { indices, cell } }];
     }
-    default: return Error('Error state');
+    default: return [Error('Error state'), null];
   }
+}
+
+function playerMove(cell: Cell) {
+  console.log('PLAYER MOVE', cell)
+  if (acceptMove(cell)) {
+    return console.log('HIT')
+  }
+  return console.log('MISS')
 }
 
 export function gridClick(
   dispatch: ContextDispatch,
   state: ContextState,
-  gridKey: GridKey
+  gridKey: GridKey,
 ) {
-  return (cell: Cell) => {
-    if (gridKey === 'opponentGrid') {
-      return Error('Wrong grid');
+  const { gameStage } = state;
+  const { shipList } = state[gridKey];
+
+  if (gridKey === 'playerGrid') {
+    if (gameStage !== GameStage.ShipsPlacement) {
+      return () => {}; // Don't to anything
     }
-    if (state.gameStage !== GameStage.ShipsPlacement) {
-      return Error('Wrong stage');
-    };
-
-    const { shipList } = state.playerGrid
-    const index = findShip(shipList, cell);
-
-    let result;
-    result = index !== -1
-      ? removeShip(shipList, index, cell)
-      : addShip(shipList, cell, state.gameSettings.maxSize);
-
-    if (result instanceof Error) return console.log(result);
-    return dispatch(result);
+    const { maxSize } = state.gameSettings;
+    return (cell: Cell) => {
+      const index = findShip(shipList, cell);
+      const [error, action] = index !== -1
+        ? createRemoveAction(shipList, cell, index)
+        : createAddAction(shipList, cell, maxSize);
+      if (error) return console.log(error);
+      return dispatch(action as ContextActionType); 
+    }
   }
+
+  if (gameStage !== GameStage.Game) {
+    return () => {};
+  }
+  return (cell: Cell) => { playerMove(cell) };
 }
 
 export function clear(dispatch: ContextDispatch, state: ContextState) {
@@ -118,6 +139,7 @@ export function play(dispatch: ContextDispatch, state: ContextState) {
     if (!isShipPlacementValid(shipList, shipTypeList)) {
       return Error('Wrong ship placement');
     }
+    console.log('PLAYER READY')
     return dispatch({ type: PLAYER_READY });
   }
 }

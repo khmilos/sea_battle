@@ -61,10 +61,30 @@ interface PlayerReadyAction extends Action {
   type: typeof PLAYER_READY;
 }
 
+// Moves
+export const PLAYER_MOVE = 'PLAYER_MOVE';
+export const OPPONENT_MOVE = 'OPPONENT_MOVE';
+
+interface PlayerMoveAction {
+  type: typeof PLAYER_MOVE;
+  payload: {
+    cell: Cell;
+  };
+}
+
+interface OpponentMoveAction {
+  type: typeof OPPONENT_MOVE;
+  payload: {
+    cell: Cell;
+  };
+}
+
 export type ContextActionType = NewShipAction
   | ExpandShipAction
   | RemoveShipAction
   | SplitShipAction
   | MergeShipsAction
   | ClearShipsAction
-  | PlayerReadyAction;
+  | PlayerReadyAction
+  | PlayerMoveAction
+  | OpponentMoveAction;
