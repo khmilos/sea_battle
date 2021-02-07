@@ -15,12 +15,10 @@ const initContext: ContextValue = {
     gameStage: GameStage.ShipsPlacement,
     playerGrid: {
       shipList: testPlayerGridShipList,
-      missList: [],
       hitList: [],
     },
     opponentGrid: {
       shipList: [],
-      missList: [],
       hitList: [],
     },
   },

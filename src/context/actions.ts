@@ -15,7 +15,10 @@ import {
   SHRINK_SHIP,
   CLEAR_SHIPS,
   ContextActionType,
-  CurrentMove
+  CurrentMove,
+  PLAYER_MADE_MOVE,
+  PLAYER_MOVE_RESPONSE,
+  OPPONENT_MADE_MOVE,
 } from './types';
 import { findAdjacentShips, findShip, isDiagonallyAdjacent } from './utils';
 
@@ -72,18 +75,6 @@ function createAddAction(
   }
 }
 
-function playerMove(cell: Cell) {
-  console.log('PLAYER MOVE', cell)
-  if (acceptMove(cell)) {
-    return console.log('HIT')
-  }
-  return console.log('MISS')
-}
-
-function aiMove() {
-  return makeMove();
-}
-
 export function gridClick(
   dispatch: ContextDispatch,
   state: ContextState,
@@ -108,11 +99,33 @@ export function gridClick(
   }
 
   const { currentMove } = state;
-  if (gameStage !== GameStage.Game || currentMove !== CurrentMove.Opponent) {
+  if (gameStage !== GameStage.Game || currentMove !== CurrentMove.Player) {
     return () => {};
   }
   return (cell: Cell) => {
-    playerMove(cell);
+    dispatch({ type: PLAYER_MADE_MOVE, payload: { cell } });
+    const isHit = acceptMove(cell);
+    if (isHit) { console.log('HIT'); }
+    dispatch({ type: PLAYER_MOVE_RESPONSE, payload: { isHit, cell } });
+    if (!isHit) {
+      while (true) {
+        const aiMove = makeMove();
+        console.log('ENEMY MOVE:', aiMove)
+        const isOpponentHit = findShip(state.playerGrid.shipList, aiMove);
+        console.log('IS HIT', isOpponentHit);
+        if (isOpponentHit !== -1) {
+          dispatch({
+            type: OPPONENT_MADE_MOVE,
+            payload: { cell: aiMove, isHit: true },
+          });
+          continue;
+        }
+        return dispatch({
+          type: OPPONENT_MADE_MOVE,
+          payload: { cell: aiMove, isHit: false },
+        });
+      }
+    }
   };
 }
 

@@ -31,3 +31,11 @@
 .unkown {
   background: slategrey;
 }
+
+.miss {
+  background: pink;
+}
+
+.hit {
+  background: red;
+}

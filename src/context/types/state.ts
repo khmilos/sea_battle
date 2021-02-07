@@ -12,7 +12,6 @@ export interface ShipType {
 
 export interface GameGridState {
   shipList: Ship[];
-  missList: Cell[];
   hitList: Cell[];
 }
 

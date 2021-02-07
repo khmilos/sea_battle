@@ -10,8 +10,9 @@ import styles from './styles.module.css';
 function GameGrid({ gridKey }: { gridKey: GridKey }) {
   const { state, dispatch } = useContext(context);
   const { gameStage } = state;
+  const { shipList, hitList } = state[gridKey];
   const handleClick = gridClick(dispatch, state, gridKey);
-  const grid = initGrid(state[gridKey].shipList, gridKey);
+  const grid = initGrid(shipList, hitList, gridKey);
   const isDisabled = (!(
     (gridKey === 'playerGrid' && gameStage === GameStage.ShipsPlacement)
     || (gridKey === 'opponentGrid' && gameStage === GameStage.Game)

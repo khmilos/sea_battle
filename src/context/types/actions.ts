@@ -77,6 +77,7 @@ interface PlayerMoveResponseAction {
   type: typeof PLAYER_MOVE_RESPONSE;
   payload: {
     isHit: boolean;
+    cell: Cell;
   };
 }
 
@@ -84,6 +85,7 @@ interface OpponentMadeMoveAction {
   type: typeof OPPONENT_MADE_MOVE;
   payload: {
     cell: Cell;
+    isHit: boolean;
   };
 }
 

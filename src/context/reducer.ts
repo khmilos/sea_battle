@@ -13,6 +13,7 @@ import {
   PLAYER_READY,
   PLAYER_MADE_MOVE,
   PLAYER_MOVE_RESPONSE,
+  OPPONENT_MADE_MOVE,
 } from './types';
 
 function reducer (state: ContextState, action: ContextActionType) {
@@ -61,22 +62,42 @@ function reducer (state: ContextState, action: ContextActionType) {
       return { ...state, playerGrid: { ...state.playerGrid, shipList } };
     }
     case CLEAR_SHIPS: {
-      return {
-        ...state,
-        playerGrid: { ...state.playerGrid, shipList: [] },
-      };
+      return { ...state, playerGrid: { ...state.playerGrid, shipList: [] } };
     }
     case PLAYER_READY: {
-      return { ...state, gameStage: GameStage.Game };
+      return {
+        ...state,
+        gameStage: GameStage.Game,
+        currentMove: CurrentMove.Player,
+      };
     }
     case PLAYER_MADE_MOVE: {
       return { ...state, currentMove: CurrentMove.Waiting };
     }
     case PLAYER_MOVE_RESPONSE: {
+      const hitList = [...state.opponentGrid.hitList, action.payload.cell]
       if (action.payload.isHit) {
-        return { ...state, currentMove: CurrentMove.Player };
+        const shipList = [...state.opponentGrid.shipList, [action.payload.cell]]
+        return {
+          ...state,
+          currentMove: CurrentMove.Player,
+          opponentGrid: { ...state.opponentGrid, shipList, hitList }
+        };
       }
-      return { ...state, currentMove: CurrentMove.Opponent };
+      return {
+        ...state,
+        currentMove: CurrentMove.Opponent,
+        opponentGrid: { ...state.opponentGrid, hitList }
+      };
+    }
+    case OPPONENT_MADE_MOVE: {
+      const { cell, isHit } = action.payload;
+      const hitList = [...state.playerGrid.hitList, cell]
+      return {
+        ...state,
+        playerGrid: { ...state.playerGrid, hitList },
+        currentMove: isHit ? CurrentMove.Opponent : CurrentMove.Player,
+      };
     }
     default: return state;
   }
