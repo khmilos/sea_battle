@@ -20,6 +20,7 @@ import {
   PLAYER_MOVE_RESPONSE,
   OPPONENT_MADE_MOVE,
   GAME_LOG_MESSAGE,
+  POPUP_MESSAGE,
 } from './types';
 import { findAdjacentShips, findShip, isDiagonallyAdjacent } from './utils';
 
@@ -92,7 +93,12 @@ export function gridClick(
       const [error, action] = index !== -1
         ? createRemoveAction(shipList, cell, index)
         : createAddAction(shipList, cell, maxSize);
-      if (error) return;
+      if (error) {
+        return dispatch({
+          type: POPUP_MESSAGE,
+          payload: { title: 'Error', text: error.message },
+        });
+      }
       return dispatch(action as ContextActionType); 
     }
   }

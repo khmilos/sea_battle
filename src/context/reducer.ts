@@ -15,6 +15,7 @@ import {
   PLAYER_MOVE_RESPONSE,
   OPPONENT_MADE_MOVE,
   GAME_LOG_MESSAGE,
+  POPUP_MESSAGE,
 } from './types';
 
 function reducer (state: ContextState, action: ContextActionType) {
@@ -102,6 +103,9 @@ function reducer (state: ContextState, action: ContextActionType) {
     }
     case GAME_LOG_MESSAGE: {
       return { ...state, gameLogList: [...state.gameLogList, action.payload] };
+    }
+    case POPUP_MESSAGE: {
+      return { ...state, popupMessanger: action.payload };
     }
     default: return state;
   }

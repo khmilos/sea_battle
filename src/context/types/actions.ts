@@ -1,4 +1,5 @@
 import { Cell } from './state';
+import { Message } from 'components/PopupMessenger/types';
 
 interface Action {
   type: string;
@@ -101,6 +102,14 @@ interface GameLogMessageAction {
   };
 }
 
+// POPUP
+export const POPUP_MESSAGE = 'POPUP_MESSAGE';
+
+interface PopupMessageAction {
+  type: typeof POPUP_MESSAGE;
+  payload: Message;
+}
+
 export type ContextActionType = NewShipAction
   | ExpandShipAction
   | RemoveShipAction
@@ -111,4 +120,5 @@ export type ContextActionType = NewShipAction
   | PlayerMadeMoveAction
   | PlayerMoveResponseAction
   | OpponentMadeMoveAction
-  | GameLogMessageAction;
+  | GameLogMessageAction
+  | PopupMessageAction;

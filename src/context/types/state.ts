@@ -1,4 +1,5 @@
 import { ContextActionType } from './actions';
+import { Message } from 'components/PopupMessenger/types';
 
 export type Cell = [number, number];
 
@@ -45,6 +46,7 @@ export interface ContextState {
   opponentGrid: GameGridState;
   currentMove: CurrentMove;
   gameLogList: GameLog[];
+  popupMessanger: Message | null;
 }
 
 export type ContextDispatch = (action: ContextActionType) => void;

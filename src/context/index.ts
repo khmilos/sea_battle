@@ -22,6 +22,7 @@ const initContext: ContextValue = {
       shipList: [],
       hitList: [],
     },
+    popupMessanger: null,
   },
   dispatch: (action) => {},
 };
