@@ -1,25 +1,24 @@
 .container {
   display: flex;
-  flex-direction: column;
-  padding: 15px;
-  border: 1px solid black;
+  justify-content: space-between;
+  padding: 10px;
   border-radius: 15px;
-}
-
-.container > * {
-  margin-bottom: 15px;
-}
-
-.container > *:last-child {
-  margin-bottom: 0;
+  background: var(--background-color-second);
+  box-shadow: var(--box-shadow-main);
 }
 
 .button {
-  padding: 0 15px;
+  flex: 1;
+  margin-right: 10px;
   height: 40px;
-  border: 1px solid black;
-  border-radius: 15px;
-  font-size: 18px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-main);
+  color: var(--text-color-main);
+  font-size: var(--text-size-large);
+}
+
+.button:last-child {
+  margin-right: 0;
 }
 
 .button:active {
@@ -27,9 +26,9 @@
 }
 
 .play {
-  background: greenyellow;
+  background: var(--background-color-ok);
 }
 
 .reset {
-  background: rosybrown;
+  background: var(--background-color-error);
 }

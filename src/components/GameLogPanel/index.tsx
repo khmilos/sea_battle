@@ -32,7 +32,7 @@ function GameLogPanel() {
             ))}
           </tbody>
         </table>
-        {!gameLogList.length && (
+        {gameLogList.length === 0 && (
           <div className={styles.empty}>
             Game log is empty
           </div>

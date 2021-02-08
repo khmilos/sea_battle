@@ -85,16 +85,14 @@ export function gridClick(
   const { shipList } = state[gridKey];
 
   if (gridKey === 'playerGrid') {
-    if (gameStage !== GameStage.ShipsPlacement) {
-      return () => {}; // Don't to anything
-    }
+    if (gameStage !== GameStage.ShipsPlacement) return () => {};
     const { maxSize } = state.gameSettings;
     return (cell: Cell) => {
       const index = findShip(shipList, cell);
       const [error, action] = index !== -1
         ? createRemoveAction(shipList, cell, index)
         : createAddAction(shipList, cell, maxSize);
-      if (error) return console.log(error);
+      if (error) return;
       return dispatch(action as ContextActionType); 
     }
   }
@@ -103,31 +101,27 @@ export function gridClick(
   if (gameStage !== GameStage.Game || currentMove !== CurrentMove.Player) {
     return () => {};
   }
+
   return (cell: Cell) => {
     dispatch({ type: PLAYER_MADE_MOVE, payload: { cell } });
     const isHit = acceptMove(cell);
-    if (isHit) { console.log('HIT'); }
     dispatch({ type: PLAYER_MOVE_RESPONSE, payload: { cell, isHit } });
     dispatch({
       type: GAME_LOG_MESSAGE,
       payload: { player: 'player', cell, isHit },
     });
-
-
     if (!isHit) {
       while (true) {
         const aiMove = makeMove();
-        console.log('ENEMY MOVE:', aiMove)
         const isOpponentHit = findShip(state.playerGrid.shipList, aiMove);
-        console.log('IS HIT', isOpponentHit);
         if (isOpponentHit !== -1) {
           dispatch({
             type: OPPONENT_MADE_MOVE,
-            payload: { cell: aiMove, isHit: (false as boolean) },
+            payload: { cell: aiMove, isHit: false },
           });
           dispatch({
             type: GAME_LOG_MESSAGE,
-            payload: { player: 'opponent', cell, isHit: (true as boolean) },
+            payload: { player: 'opponent', cell: aiMove, isHit: true },
           });
           continue;
         }
@@ -137,7 +131,7 @@ export function gridClick(
         });
         dispatch({
           type: GAME_LOG_MESSAGE,
-          payload: { player: 'opponent', cell, isHit: (false as boolean) },
+          payload: { player: 'opponent', cell: aiMove, isHit: false },
         });
         return;
       }

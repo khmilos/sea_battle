@@ -2,10 +2,14 @@
   --background-color-main: #F7FFF7;
   --background-color-second: #4ECDC4;
   --background-color-third: #E5EDE5;
+  --background-color-error: #FF6B6B;
+  --background-color-ok: #7EEC7E;
   --border-main: 1px solid #404040;
   --border-second: 1px solid #606060;
   --text-color-main: #404040;
   --text-color-second: #606060;
+  --text-color-error: #FF6B6B;
+  --text-color-ok: #005E00;
   --text-size-large: 24px;
   --text-size-medium: 18px;
   --box-shadow-main: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -36,7 +40,6 @@ button:focus {
   outline: none;
 }
 
-
 h1,
 h2,
 h3,
@@ -45,4 +48,10 @@ h5,
 h6,
 p {
   margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

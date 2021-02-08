@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import context from 'context';
-import { initStatus } from './utils';
+import { initStatus, getClass } from './utils';
 import styles from './styles.module.css';
 
 function ShipPanel() {
@@ -10,12 +10,18 @@ function ShipPanel() {
   const shipStateList = initStatus(shipList, shipTypeList);
   return (
     <div className={styles.container}>
-      {shipStateList.map((shipType, i) => (
-        <div key={i} className={styles.row}>
-          <span>{shipType.name}</span>
-          <span>{shipType.current} / {shipType.quantity}</span>
-        </div>
-      ))}
+      <h2>Place Your Ships</h2>
+      <ul className={styles.list}>
+        {shipStateList.map(({name, current, quantity}, i) => (
+          <li
+            key={i}
+            className={`${styles.item} ${getClass(current, quantity)}`}
+          >
+            <span>{name}</span>
+            <span>{current} / {quantity}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

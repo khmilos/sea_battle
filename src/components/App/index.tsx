@@ -18,8 +18,8 @@ function App() {
       </main>
       <aside className={styles.board}>
         <ShipPanel />
-        <ControlPanel />
         <GameLogPanel />
+        <ControlPanel />
       </aside>
     </div>
   );
