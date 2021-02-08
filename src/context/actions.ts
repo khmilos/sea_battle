@@ -19,6 +19,7 @@ import {
   PLAYER_MADE_MOVE,
   PLAYER_MOVE_RESPONSE,
   OPPONENT_MADE_MOVE,
+  GAME_LOG_MESSAGE,
 } from './types';
 import { findAdjacentShips, findShip, isDiagonallyAdjacent } from './utils';
 
@@ -106,7 +107,13 @@ export function gridClick(
     dispatch({ type: PLAYER_MADE_MOVE, payload: { cell } });
     const isHit = acceptMove(cell);
     if (isHit) { console.log('HIT'); }
-    dispatch({ type: PLAYER_MOVE_RESPONSE, payload: { isHit, cell } });
+    dispatch({ type: PLAYER_MOVE_RESPONSE, payload: { cell, isHit } });
+    dispatch({
+      type: GAME_LOG_MESSAGE,
+      payload: { player: 'player', cell, isHit },
+    });
+
+
     if (!isHit) {
       while (true) {
         const aiMove = makeMove();
@@ -116,14 +123,23 @@ export function gridClick(
         if (isOpponentHit !== -1) {
           dispatch({
             type: OPPONENT_MADE_MOVE,
-            payload: { cell: aiMove, isHit: true },
+            payload: { cell: aiMove, isHit: (false as boolean) },
+          });
+          dispatch({
+            type: GAME_LOG_MESSAGE,
+            payload: { player: 'opponent', cell, isHit: (true as boolean) },
           });
           continue;
         }
-        return dispatch({
+        dispatch({
           type: OPPONENT_MADE_MOVE,
           payload: { cell: aiMove, isHit: false },
         });
+        dispatch({
+          type: GAME_LOG_MESSAGE,
+          payload: { player: 'opponent', cell, isHit: (false as boolean) },
+        });
+        return;
       }
     }
   };

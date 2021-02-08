@@ -6,6 +6,7 @@ const testPlayerGridShipList: Ship[] = [[[0,0],[0,1],[0,2],[0,3]],[[0,5],[0,6],[
 
 const initContext: ContextValue = {
   state: {
+    gameLogList: [],
     currentMove: CurrentMove.Neither,
     gameSettings: {
       name: 'basic',

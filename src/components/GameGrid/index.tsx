@@ -19,9 +19,19 @@ function GameGrid({ gridKey }: { gridKey: GridKey }) {
   ));
   return (
     <table className={styles.table}>
+      <caption>
+        {gridKey === 'playerGrid' ? 'Your Grid' : 'Opponent Grid'}
+      </caption>
       <tbody>
+        <tr>
+          <td className={styles.scip}></td>
+          {Array(grid.length).fill(null).map((_, i) => (
+            <th scope='col' key={i}>{i + 1}</th>
+          ))}
+        </tr>
         {grid.map((row, i) => (
           <tr key={i}>
+            <th scope='row'>{String.fromCharCode(65 + i)}</th>
             {row.map((cell, j) => (
               <td key={j}>
                 <button

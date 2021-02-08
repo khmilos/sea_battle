@@ -89,6 +89,18 @@ interface OpponentMadeMoveAction {
   };
 }
 
+// Game Log Message
+export const GAME_LOG_MESSAGE = 'GAME_LOG_MESSAGE';
+
+interface GameLogMessageAction {
+  type: typeof GAME_LOG_MESSAGE;
+  payload: {
+    player: string;
+    cell: Cell;
+    isHit: boolean;
+  };
+}
+
 export type ContextActionType = NewShipAction
   | ExpandShipAction
   | RemoveShipAction
@@ -98,4 +110,5 @@ export type ContextActionType = NewShipAction
   | PlayerReadyAction
   | PlayerMadeMoveAction
   | PlayerMoveResponseAction
-  | OpponentMadeMoveAction;
+  | OpponentMadeMoveAction
+  | GameLogMessageAction;

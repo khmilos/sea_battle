@@ -2,6 +2,7 @@ import React from 'react';
 import GameGrid from 'components/GameGrid';
 import ShipPanel from 'components/ShipPanel';
 import ControlPanel from 'components/ControlPanel';
+import GameLogPanel from 'components/GameLogPanel';
 import styles from './styles.module.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <aside className={styles.board}>
         <ShipPanel />
         <ControlPanel />
+        <GameLogPanel />
       </aside>
     </div>
   );

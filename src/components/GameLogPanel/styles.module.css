@@ -1,0 +1,81 @@
+.container {
+  padding: 10px;
+  border-radius: 15px;
+  background: var(--background-color-second);
+  box-shadow: var(--box-shadow-main);
+  color: var(--text-color-second);
+  font-size: var(--text-size-medium);
+}
+
+.container h2 {
+  margin-bottom: 10px;
+  color: var(--text-color-main);
+  font-size: var(--text-size-large);
+  font-weight: 900;
+}
+
+.tableWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  background: var(--background-color-main);
+  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.table th, .table td {
+  height: 40px;
+  background: var(--background-color-main);
+  border: var(--border-second);
+  border-top: none;
+  border-right: none;
+}
+
+.table th:first-child, .table td:first-child {
+  width: 40px;
+  border-left: none;
+}
+
+.table td:nth-child(2) {
+  width: auto;
+}
+
+.table td:nth-child(3) {
+  width: 40px;
+}
+
+.table td:last-child {
+  width: 75px;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  font-weight: 700;
+}
+
+.table tbody tr:last-child > * {
+  /* border-bottom: none; */
+}
+
+.table tbody th, .table tbody td {
+  font-weight: 300;
+  text-align: center;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background: var(--background-color-main);
+  font-weight: 300;
+}

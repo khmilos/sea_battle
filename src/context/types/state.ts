@@ -44,6 +44,7 @@ export interface ContextState {
   playerGrid: GameGridState;
   opponentGrid: GameGridState;
   currentMove: CurrentMove;
+  gameLogList: GameLog[];
 }
 
 export type ContextDispatch = (action: ContextActionType) => void;
@@ -51,4 +52,10 @@ export type ContextDispatch = (action: ContextActionType) => void;
 export interface ContextValue {
   state: ContextState;
   dispatch: ContextDispatch;
+}
+
+export interface GameLog {
+  player: string;
+  cell: Cell;
+  isHit: boolean;
 }

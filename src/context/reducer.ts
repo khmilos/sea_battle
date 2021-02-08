@@ -14,6 +14,7 @@ import {
   PLAYER_MADE_MOVE,
   PLAYER_MOVE_RESPONSE,
   OPPONENT_MADE_MOVE,
+  GAME_LOG_MESSAGE,
 } from './types';
 
 function reducer (state: ContextState, action: ContextActionType) {
@@ -98,6 +99,9 @@ function reducer (state: ContextState, action: ContextActionType) {
         playerGrid: { ...state.playerGrid, hitList },
         currentMove: isHit ? CurrentMove.Opponent : CurrentMove.Player,
       };
+    }
+    case GAME_LOG_MESSAGE: {
+      return { ...state, gameLogList: [...state.gameLogList, action.payload] };
     }
     default: return state;
   }

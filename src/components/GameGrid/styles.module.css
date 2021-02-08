@@ -7,13 +7,25 @@
   border-spacing: 0;
 }
 
+.table caption {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.table th {
+  font-size: 24px;
+}
+
+.table td {
+  padding: 0;
+  border: 1px solid black;
+}
+
 .cell {
   display: flex;
   padding: 0;
   width: var(--cell-size);
   height: var(--cell-size);
-  border: 1px solid black;
-  border-radius: 5px;
 }
 
 .cell:active {
@@ -38,4 +50,9 @@
 
 .hit {
   background: red;
+}
+
+.scip {
+  border: none !important;
+  background: none;
 }
