@@ -37,6 +37,9 @@ function GameLogPanel() {
             Game log is empty
           </div>
         )}
+        <div ref={(div) => {
+          div?.scrollIntoView({ behavior: 'smooth' });
+        }}></div>
       </div>
     </div>
   );

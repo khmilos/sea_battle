@@ -1,16 +1,16 @@
-import { ShipType, Ship } from 'context/types';
-import { ShipTypeState } from './types';
+import { ShipMeta, Ship } from 'context/types';
+import { ShipMetaState } from './types';
 import styles from './styles.module.css';
 
 export function initStatus(
   shipList: Ship[],
-  shipTypeList: ShipType[]
-): ShipTypeState[] {
-  return shipTypeList.map((shipType) => {
+  shipMetaList: ShipMeta[]
+): ShipMetaState[] {
+  return shipMetaList.map((shipMeta) => {
     const current = shipList.reduce((s, x) => {
-      return s + (x.length === shipType.size ? 1 : 0);
+      return s + (x.length === shipMeta.size ? 1 : 0);
     }, 0);
-    return { ...shipType, current };
+    return { ...shipMeta, current };
   });
 }
 

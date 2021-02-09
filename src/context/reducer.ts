@@ -1,6 +1,6 @@
 import {
-  ContextState,
-  ContextActionType,
+  State,
+  Action,
   Ship,
   GameStage,
   CurrentMove,
@@ -16,9 +16,12 @@ import {
   OPPONENT_MADE_MOVE,
   GAME_LOG_MESSAGE,
   POPUP_MESSAGE,
+  ThunkAction,
 } from './types';
 
-function reducer(state: ContextState, action: ContextActionType) {
+function reducer(state: State, action: Action | ThunkAction) {
+  // TODO: Peek problem in ContextProvider when action has ThunkAction type
+  if (typeof action === 'function') return state; 
   switch (action.type) {
     case NEW_SHIP: {
       const { cell } = action.payload;

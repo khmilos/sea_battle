@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useEffect, useContext } from 'react';
+import { ReactNode, useState, useEffect, useContext } from 'react';
 import context from 'context';
 import CloseIcon from 'assets/close.svg';
 import { MessageItem } from './types';
@@ -15,7 +15,7 @@ function PopupMessanger({ children }: { children: ReactNode }) {
       text: state.popupMessanger.text,
       timeout: setTimeout(() => {
         setMessageList((prev) => prev.filter((x) => x !== message));
-      }, 50000),
+      }, 5000),
     };
     setMessageList((prev) => [...prev, message]);
   }, [state.popupMessanger]);

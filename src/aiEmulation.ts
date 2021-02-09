@@ -15,29 +15,13 @@ const grid = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-const move = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
-
-export function makeMove(): Cell {
+export function getAiMove(): Cell {
   const i = Math.round(Math.random() * 10);
   const j = Math.round(Math.random() * 10);
-
-  return [i, j]
+  return [i, j];
 }
 
-export function acceptMove(cell: Cell) {
+export function putPlayerMove(cell: Cell) {
   if (grid[cell[0]][cell[1]]) return true;
   return false;
 }

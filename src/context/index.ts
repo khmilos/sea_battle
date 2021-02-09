@@ -1,17 +1,57 @@
-import { createContext } from 'react';
-import { ContextValue, GameStage, CurrentMove, Ship } from './types';
-import settingsData from './settings.json';
+import { createContext } from "react";
+import settingsData from "./settings.json";
+import {
+  Context,
+  GameStage,
+  CurrentMove,
+  Ship,
+  Action,
+  ThunkAction,
+} from "./types";
 
-const testPlayerGridShipList: Ship[] = [[[0,0],[0,1],[0,2],[0,3]],[[0,5],[0,6],[0,7]],[[2,0],[2,1],[2,2]],[[2,4],[2,5]],[[2,7],[2,8]],[[4,0],[4,1]],[[4,3]],[[4,5]],[[4,7]],[[4,9]]]
+const testPlayerGridShipList: Ship[] = [
+  [
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+  ],
+  [
+    [0, 5],
+    [0, 6],
+    [0, 7],
+  ],
+  [
+    [2, 0],
+    [2, 1],
+    [2, 2],
+  ],
+  [
+    [2, 4],
+    [2, 5],
+  ],
+  [
+    [2, 7],
+    [2, 8],
+  ],
+  [
+    [4, 0],
+    [4, 1],
+  ],
+  [[4, 3]],
+  [[4, 5]],
+  [[4, 7]],
+  [[4, 9]],
+];
 
-const initContext: ContextValue = {
+const defaultValue: Context = {
   state: {
     gameLogList: [],
     currentMove: CurrentMove.Neither,
     gameSettings: {
-      name: 'basic',
+      name: "basic",
       maxSize: 4,
-      shipTypeList: settingsData['basic'],
+      shipMetaList: settingsData["basic"],
     },
     gameStage: GameStage.ShipsPlacement,
     playerGrid: {
@@ -24,9 +64,9 @@ const initContext: ContextValue = {
     },
     popupMessanger: null,
   },
-  dispatch: (action) => {},
+  dispatch: (action: Action | ThunkAction) => {},
 };
 
-const context = createContext(initContext);
+const context = createContext(defaultValue);
 
 export default context;

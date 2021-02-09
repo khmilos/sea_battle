@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import context from 'context';
-import { gridClick } from 'context/actions';
-import { GameStage, GridKey } from 'context/types';
+import { addShip, removeShip, gameFlow } from 'context/actions';
+import { Cell, GameStage, GridKey } from 'context/types';
+import { findShip } from 'context/utils';
 
 import { initGrid, getClass } from './utils';
 import styles from './styles.module.css';
@@ -11,7 +12,26 @@ function GameGrid({ gridKey }: { gridKey: GridKey }) {
   const { state, dispatch } = useContext(context);
   const { gameStage } = state;
   const { shipList, hitList } = state[gridKey];
-  const handleClick = gridClick(dispatch, state, gridKey);
+  
+  let handleClick = (cell: Cell) => {};
+  if (gridKey === 'playerGrid' && gameStage === GameStage.ShipsPlacement) {
+    handleClick = (cell: Cell) => {
+      if (findShip(shipList, cell) === -1) return dispatch(addShip(cell));
+      return dispatch(removeShip(cell));
+    }
+  } else if (
+    gridKey === 'opponentGrid' && gameStage === GameStage.Game
+  ) {
+    handleClick = (cell: Cell) => {
+      const isMoveExists = hitList.find((hit) => {
+        return hit[0] === cell[0] && hit[1] === cell[1]
+      });
+      if (isMoveExists) return;
+      dispatch(gameFlow(cell));
+    }
+  }
+
+
   const grid = initGrid(shipList, hitList, gridKey);
   const isDisabled = (!(
     (gridKey === 'playerGrid' && gameStage === GameStage.ShipsPlacement)

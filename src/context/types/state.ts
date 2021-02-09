@@ -1,63 +1,54 @@
-import { ContextActionType } from './actions';
-import { Message } from 'components/PopupMessenger/types';
+import {
+  PlayerMadeMove,
+  PlayerMoveResponse,
+  OpponentMadeMove,
+  GameLogMessage,
+  PopupMessage,
+  NewShip,
+  ExpandShip,
+  RemoveShip,
+  SplitShip,
+  MergeShips,
+  ClearShips,
+  PlayerReady,
+} from './actions';
+import {
+  GameSettings,
+  GameStage,
+  GameGridState,
+  CurrentMove,
+  MoveLog,
+  Message,
+} from './data';
 
-export type Cell = [number, number];
+export type Action = PlayerMadeMove
+  | PlayerMoveResponse
+  | OpponentMadeMove
+  | GameLogMessage
+  | PopupMessage
+  | NewShip
+  | ExpandShip
+  | RemoveShip
+  | SplitShip
+  | MergeShips
+  | ClearShips
+  | PlayerReady;
 
-export type Ship = Cell[];
+export type ThunkAction = (dispatch: Dispatch, state: State) => void;
 
-export interface ShipType {
-  name: string;
-  size: number;
-  quantity: number;
-}
+export type State = {
+  gameSettings: GameSettings,
+  gameStage: GameStage,
+  playerGrid: GameGridState,
+  opponentGrid: GameGridState,
+  currentMove: CurrentMove,
+  gameLogList: MoveLog[],
+  popupMessanger: Message | null,
+};
 
-export interface GameGridState {
-  shipList: Ship[];
-  hitList: Cell[];
-}
+export type Dispatch = (action: Action | ThunkAction) => void;
 
-export type GridKey = 'playerGrid' | 'opponentGrid';
-
-export enum GameStage {
-  ShipsPlacement,
-  WaitingOpponent,
-  Game,
-}
-
-export interface GameSettings {
-  name: string;
-  maxSize: number;
-  shipTypeList: {
-    [shipName: string]: ShipType;
-  };
-}
-
-export enum CurrentMove {
-  Player,
-  Waiting,
-  Opponent,
-  Neither,
-}
-
-export interface ContextState {
-  gameSettings: GameSettings;
-  gameStage: GameStage;
-  playerGrid: GameGridState;
-  opponentGrid: GameGridState;
-  currentMove: CurrentMove;
-  gameLogList: GameLog[];
-  popupMessanger: Message | null;
-}
-
-export type ContextDispatch = (action: ContextActionType) => void;
-
-export interface ContextValue {
-  state: ContextState;
-  dispatch: ContextDispatch;
-}
-
-export interface GameLog {
-  player: string;
-  cell: Cell;
-  isHit: boolean;
-}
+export type Context = {
+  state: State,
+  dispatch: Dispatch,
+};
