@@ -12,7 +12,6 @@ function ContextProvider({ children }: { children: ReactNode }) {
     state: providerState,
     dispatch: providerDispatch,
   };
-
   return <Provider value={providerValue}>{children}</Provider>;
 }
 

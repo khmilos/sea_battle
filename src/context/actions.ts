@@ -6,7 +6,6 @@ import {
   GameStage,
   GridKey,
   Ship,
-  ShipType,
   NEW_SHIP,
   EXPAND_SHIP,
   MERGE_SHIPS,
@@ -22,7 +21,12 @@ import {
   GAME_LOG_MESSAGE,
   POPUP_MESSAGE,
 } from './types';
-import { findAdjacentShips, findShip, isDiagonallyAdjacent } from './utils';
+import {
+  findAdjacentShips,
+  findShip,
+  isDiagonallyAdjacent,
+  isShipPlacementValid,
+} from './utils';
 
 type Either<T, U> = [T, null] | [null, U];
 
@@ -154,28 +158,23 @@ export function clear(dispatch: ContextDispatch, state: ContextState) {
   }
 }
 
-function isShipPlacementValid(shipList: Ship[], shipTypeList: ShipType[]) {
-  const sizeList = shipList.map((ship) => ship.length);
-  const sizeQuantityDict = sizeList.reduce((result, length) => {
-    return { ...result, [length]: (result[length] || 0) + 1 };
-  }, ({} as { [key: number]: number }));
-  const isValid = shipTypeList.reduce((result, shipType) => {
-    return result && sizeQuantityDict[shipType.size] === shipType.quantity;
-  }, true);
-  return isValid;
+export function popupMessage(
+  dispatch: ContextDispatch,
+  title: string,
+  text: string,
+) {
+  return dispatch({ type: POPUP_MESSAGE, payload: { title, text }});
 }
 
 export function play(dispatch: ContextDispatch, state: ContextState) {
-  return () => {
-    if (state.gameStage !== GameStage.ShipsPlacement) {
-      return Error('Wrong stage');
-    }
-    const { shipList } = state.playerGrid;
-    const shipTypeList = Object.values(state.gameSettings.shipTypeList);
-    if (!isShipPlacementValid(shipList, shipTypeList)) {
-      return Error('Wrong ship placement');
-    }
-    console.log('PLAYER READY')
-    return dispatch({ type: PLAYER_READY });
+  const { gameStage } = state;
+  if (gameStage !== GameStage.ShipsPlacement) return;
+  const { shipList } = state.playerGrid;
+  const shipTypeList = Object.values(state.gameSettings.shipTypeList);
+  const isValid = isShipPlacementValid(shipList, shipTypeList);
+  if (!isValid) {
+    return popupMessage(dispatch, 'Error', 'Ship placement isn\'t valid');
   }
+  popupMessage(dispatch, 'Message', 'Game started!');
+  return dispatch({ type: PLAYER_READY });
 }

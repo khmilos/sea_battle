@@ -18,7 +18,7 @@ import {
   POPUP_MESSAGE,
 } from './types';
 
-function reducer (state: ContextState, action: ContextActionType) {
+function reducer(state: ContextState, action: ContextActionType) {
   switch (action.type) {
     case NEW_SHIP: {
       const { cell } = action.payload;
