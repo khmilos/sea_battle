@@ -4,10 +4,12 @@
 
 .gridWrapper {
   display: flex;
+  align-items: center;
 }
 
 .grid {
-  padding: 15px;
+  display: flex;
+  padding: 10px;
 }
 
 .board {
@@ -24,4 +26,49 @@
 
 .board > *:last-child {
   margin-bottom: 0;
+}
+
+.menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  display: none;
+  width: 35px;
+  height: 35px;
+  background: var(--background-color-second);
+  border-radius: 50%;
+  box-shadow: var(--box-shadow-main);
+}
+
+.menu:active {
+  opacity: .5;
+}
+
+.menu img {
+  width: 100%;
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    padding-top: 25px;
+  }
+
+  .gridWrapper {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .grid {
+    justify-content: center;
+  }
+
+  .board {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+  }
 }

@@ -3,17 +3,27 @@ import ShipPanel from 'components/ShipPanel';
 import ControlPanel from 'components/ControlPanel';
 import GameLogPanel from 'components/GameLogPanel';
 import styles from './styles.module.css';
+import MenuIcon from 'assets/menu.svg';
 
 function App() {
+  const handler = () => {
+    console.log(11)
+  }
+
   return (
     <div className={styles.container}>
+      <header>
+        <button className={styles.menu} onClick={handler}>
+          <img src={MenuIcon} alt='Menu' />
+        </button>
+      </header>
       <main className={styles.gridWrapper}>
-        <section className={styles.grid}>
+        <div className={styles.grid}>
           <GameGrid gridKey='playerGrid' />
-        </section>
-        <section className={styles.grid}>
+        </div>
+        <div className={styles.grid}>
           <GameGrid gridKey='opponentGrid' />
-        </section>
+        </div>
       </main>
       <aside className={styles.board}>
         <ShipPanel />

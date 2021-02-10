@@ -1,24 +1,20 @@
-:root {
-  --cell-size: 50px;
-}
-
 .table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 .table caption {
-  font-size: 32px;
+  font-size: var(--text-size-exlarge);
   font-weight: 700;
 }
 
 .table th {
-  font-size: 24px;
+  font-size: var(--text-size-large);
 }
 
 .table td {
   padding: 0;
-  border: 1px solid black;
+  border: var(--border-main);
 }
 
 .cell {
@@ -55,4 +51,10 @@
 .scip {
   border: none !important;
   background: none;
+}
+
+@media screen and (max-width: 992px) {
+  .table caption {
+    display: none;
+  }
 }
