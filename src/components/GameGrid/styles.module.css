@@ -1,6 +1,8 @@
 .table {
   border-collapse: collapse;
   border-spacing: 0;
+  color: var(--text-color-main);
+  font-size: var(--grid-text-size);
 }
 
 .table caption {
@@ -9,7 +11,9 @@
 }
 
 .table th {
-  font-size: var(--text-size-large);
+  padding: 0;
+  min-width: var(--cell-size);
+  height: var(--cell-size);;
 }
 
 .table td {
@@ -29,26 +33,24 @@
 }
 
 .empty {
-  background: turquoise;
+  background: var(--cell-color-water);
 }
 
 .ship {
-  background: darkgrey;
-}
-
-.unkown {
-  background: slategrey;
+  background: var(--cell-color-ship);
 }
 
 .miss {
-  background: pink;
+  background: var(--cell-color-water) url('assets/miss.svg');
+  background-size: 100%;
 }
 
 .hit {
-  background: red;
+  background: var(--cell-color-ship) url('assets/hit.svg');
+  background-size: 100%;
 }
 
-.scip {
+.skip {
   border: none !important;
   background: none;
 }

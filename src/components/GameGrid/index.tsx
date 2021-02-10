@@ -44,7 +44,7 @@ function GameGrid({ gridKey }: { gridKey: GridKey }) {
       </caption>
       <tbody>
         <tr>
-          <td className={styles.scip}></td>
+          <td className={styles.skip}></td>
           {Array(grid.length).fill(null).map((_, i) => (
             <th scope='col' key={i}>{i + 1}</th>
           ))}

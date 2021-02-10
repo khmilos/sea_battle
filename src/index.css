@@ -1,5 +1,8 @@
 :root {
-  --cell-size: 50px;
+  --cell-size: 20px;
+  --cell-color-water: #F2F7FB;
+  --cell-color-ship: #D1CBC6;
+  --grid-text-size: 12px;
   --background-color-main: #F7FFF7;
   --background-color-second: #4ECDC4;
   --background-color-third: #E5EDE5;
@@ -11,27 +14,10 @@
   --text-color-second: #606060;
   --text-color-error: #FF6B6B;
   --text-color-ok: #005E00;
-  --text-size-exlarge: 32px;
-  --text-size-large: 24px;
-  --text-size-medium: 18px;
+  --text-size-exlarge: 24px;
+  --text-size-large: 10px;
+  --text-size-medium: 8px;
   --box-shadow-main: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-@media screen and (max-width: 991px) {
-  :root {
-    --cell-size: 25px;
-    --text-size-exlarge: 24px;
-    --text-size-large: 18px;
-    --text-size-medium: 12px;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  :root {
-    --cell-size: 20px;
-    --text-size-exlarge: 24px;
-    --text-size-large: 16px;
-  }
 }
 
 *, *::after, *::before {
@@ -40,14 +26,18 @@
 
 body {
   margin: 0;
+  padding-right: 50px;
+  width: 100vw;
+  height: 100vh;
   background: var(--background-color-main);
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 button {
@@ -74,4 +64,19 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  html {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    overflow-x: hidden;
+  }
+  body {
+    width: 100vh;
+    height: 100vw;
+  }
 }

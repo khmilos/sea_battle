@@ -11,7 +11,7 @@ export function initGrid(shipList: Ship[], hitList: Cell[], gridKey: GridKey) {
       if (isShip && isHit) return CellType.Hit;
       if (isShip) return CellType.Ship;
       if (isHit) return CellType.Miss;
-      return gridKey === 'opponentGrid' ? CellType.Unknown : CellType.Empty;
+      return CellType.Empty;
     });
   });
 }
@@ -20,7 +20,6 @@ export function getClass(cell: CellType) {
   switch (cell) {
     case CellType.Empty: return styles.empty;
     case CellType.Ship: return styles.ship;
-    case CellType.Unknown: return styles.unkown;
     case CellType.Miss: return styles.miss;
     case CellType.Hit: return styles.hit;
     default: return styles.empty;
