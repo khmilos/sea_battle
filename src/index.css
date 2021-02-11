@@ -24,6 +24,31 @@
   --box-shadow-main: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
+@media screen and (min-width: 992px) {
+  :root {
+    --margin-large: 20px;
+    --margin-small: 10px;
+    --padding-large: 20px;
+    --padding-small: 10px;
+    --cell-size: 30px;
+    --grid-text-size: 24px;
+    --text-size-large: 18px;
+    --text-size-medium: 14px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  :root {
+    --margin-large: 30px;
+    --margin-small: 15px;
+    --padding-large: 30px;
+    --padding-small: 15px;
+    --cell-size: 40px;
+    --text-size-large: 24px;
+    --text-size-medium: 18px;
+  }
+}
+
 *, *::after, *::before {
   box-sizing: border-box;
 }

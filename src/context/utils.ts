@@ -44,14 +44,9 @@ export function isShipPlacementValid(
 }
 
 export function isDefeat(shipList: Ship[], hitList: Cell[]) {
-  const result = shipList.find((ship) => {
-    const result = ship.find((cell) => {
-      console.log(cell, findHit(hitList, cell))
-      return findHit(hitList, cell) === -1
+  return !shipList.find((ship) => {
+    return ship.find((cell) => {
+      return findHit(hitList, cell) === -1;
     });
-    console.log(result);
-    return result;
-  })
-  console.log(result);
-  return result;
+  });
 }

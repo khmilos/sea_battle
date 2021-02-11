@@ -35,7 +35,7 @@ export function gameFlow(cell: Cell) {
     dispatch(moveResponse(cell, isPlayerHit));
     dispatch(logMove('player', cell, isPlayerHit));
     const { shipList } = state.opponentGrid;
-    if (shipList.length === 20) {
+    if (shipList.length === 19 && isPlayerHit) {
       dispatch(popupMessage('Message', 'Victory!'));
       return dispatch({ type: PLAYER_VICTORY });
     }

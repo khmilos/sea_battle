@@ -41,3 +41,9 @@
 .ok {
   color: var(--text-color-ok);
 }
+
+@media screen and (min-width: 992px) {
+  .item {
+    height: 40px;
+  }
+}

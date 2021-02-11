@@ -41,7 +41,6 @@
 .table th:first-child, .table td:first-child {
   min-width: 10px;
   width: 10px;
-  max-width: 10px;
   border-left: none;
 }
 
@@ -52,13 +51,11 @@
 .table th:nth-child(3), .table td:nth-child(3) {
   min-width: 18px;
   width: 18px;
-  max-width: 18px;
 }
 
 .table th:last-child, .table td:last-child {
   min-width: 26px;
   width: 26px;
-  max-width: 26px;
 }
 
 .table thead th {
@@ -79,4 +76,66 @@
   flex: 1;
   background: var(--background-color-main);
   font-weight: 300;
+}
+
+@media screen and (min-width: 992px) {
+  .tableWrapper {
+    height: 200px;
+  }
+
+  .table th, .table td {
+    height: 30px;
+    overflow: hidden;
+  }
+  
+  .table th:first-child, .table td:first-child {
+    min-width: 25px;
+    width: 25px;
+    border-left: none;
+  }
+  
+  .table th:nth-child(2), .table td:nth-child(2) {
+    width: auto;
+  }
+  
+  .table th:nth-child(3), .table td:nth-child(3) {
+    min-width: 40px;
+    width: 40px;
+  }
+  
+  .table th:last-child, .table td:last-child {
+    min-width: 40px;
+    width: 40px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .tableWrapper {
+    height: 300px;
+  }
+
+  .table th, .table td {
+    height: 40px;
+    overflow: hidden;
+  }
+  
+  .table th:first-child, .table td:first-child {
+    min-width: 40px;
+    width: 40px;
+    border-left: none;
+  }
+  
+  .table th:nth-child(2), .table td:nth-child(2) {
+    width: auto;
+  }
+  
+  .table th:nth-child(3), .table td:nth-child(3) {
+    min-width: 60px;
+    width: 60px;
+  }
+  
+  .table th:last-child, .table td:last-child {
+    min-width: 60px;
+    width: 60px;
+  }
 }
