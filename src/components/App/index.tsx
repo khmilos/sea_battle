@@ -6,36 +6,27 @@ import ShipPanel from 'components/ShipPanel';
 import ControlPanel from 'components/ControlPanel';
 import GameLogPanel from 'components/GameLogPanel';
 import styles from './styles.module.css';
-import MenuIcon from 'assets/menu.svg';
 
 function App() {
-  const { state, dispatch } = useContext(context);
+  const { state } = useContext(context);
   const { gameStage } = state;
-
-  const handler = () => { };
-
   return (
-    <div className={styles.container}>
-      {/* <header>
-        <button className={styles.menu} onClick={handler}>
-          <img src={MenuIcon} alt='Menu' />
-        </button>
-      </header> */}
-      <div className={styles.innerContainer}>
-        <main className={styles.gridWrapper}>
+    <div className={styles.wrapper}>
+      <main className={styles.container}>
+        <div className={styles.gridWrapper}>
           <div className={styles.grid}>
             <GameGrid gridKey='playerGrid' />
           </div>
           <div className={styles.grid}>
             <GameGrid gridKey='opponentGrid' />
           </div>
-        </main>
+        </div>
         <aside className={styles.board}>
           { gameStage === GameStage.ShipsPlacement && <ShipPanel /> }
           { gameStage === GameStage.Game && <GameLogPanel /> }
           <ControlPanel />
         </aside>
-      </div>
+      </main>
     </div>
   );
 }

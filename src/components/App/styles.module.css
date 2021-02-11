@@ -1,26 +1,23 @@
-.container {
+.wrapper {
   display: flex;
   align-items: center;
-  height: 100%;
   padding: 10px;
+  height: 100%;
 }
 
-.innerContainer {
+.container {
   display: flex;
   width: 100%;
 }
 
 .gridWrapper {
   display: flex;
-  align-items: center;
   margin-right: 10px;
 }
 
 .grid {
-  display: flex;
   margin-right: 10px;
-  padding-right: 12px;
-  padding-bottom: 12px;
+  padding: 0 12px 12px 0;
   background: var(--background-color-second);
   border-radius: 15px;
   box-shadow: var(--box-shadow-main);
@@ -32,9 +29,7 @@
 
 .board {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  margin-left: auto;
 }
 
 .board > * {
@@ -44,57 +39,3 @@
 .board > *:last-child {
   margin-bottom: 0;
 }
-
-.menu {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 10px;
-  display: none;
-  width: 35px;
-  height: 35px;
-  background: var(--background-color-second);
-  border-radius: 50%;
-  box-shadow: var(--box-shadow-main);
-}
-
-.menu:active {
-  opacity: .5;
-}
-
-.menu img {
-  width: 100%;
-}
-
-@media screen and (max-width: 992px) {
-  @media (orientation: landscape) {
-    .gridWrapper {
-      flex-direction: row !important;
-    }
-  }
-}
-
-
-/* @media screen and (max-width: 992px) {
-  .container {
-    padding-top: 25px;
-  }
-
-  .gridWrapper {
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .grid {
-    justify-content: center;
-  }
-
-  .board {
-    display: none;
-  }
-
-  .menu {
-    display: flex;
-  }
-} */

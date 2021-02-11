@@ -1,11 +1,9 @@
 import { useContext } from 'react';
-
 import context from 'context';
 import { addShip, removeShip, gameFlow } from 'context/actions';
 import { Cell, GameStage, GridKey } from 'context/types';
 import { findShip } from 'context/utils';
-
-import { initGrid, getClass } from './utils';
+import { initGrid, getClass, isMoveHasBeen } from './utils';
 import styles from './styles.module.css';
 
 function GameGrid({ gridKey }: { gridKey: GridKey }) {
@@ -23,10 +21,7 @@ function GameGrid({ gridKey }: { gridKey: GridKey }) {
     gridKey === 'opponentGrid' && gameStage === GameStage.Game
   ) {
     handleClick = (cell: Cell) => {
-      const isMoveExists = hitList.find((hit) => {
-        return hit[0] === cell[0] && hit[1] === cell[1]
-      });
-      if (isMoveExists) return;
+      if (isMoveHasBeen(hitList, cell)) return;
       dispatch(gameFlow(cell));
     }
   }
@@ -39,9 +34,6 @@ function GameGrid({ gridKey }: { gridKey: GridKey }) {
   ));
   return (
     <table className={styles.table}>
-      <caption>
-        {gridKey === 'playerGrid' ? 'Your Grid' : 'Opponent Grid'}
-      </caption>
       <tbody>
         <tr>
           <td className={styles.skip}></td>
