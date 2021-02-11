@@ -1,4 +1,5 @@
 import {
+  InitApp,
   PlayerMadeMove,
   PlayerMoveResponse,
   OpponentMadeMove,
@@ -21,7 +22,8 @@ import {
   Message,
 } from './data';
 
-export type Action = PlayerMadeMove
+export type Action = InitApp
+  | PlayerMadeMove
   | PlayerMoveResponse
   | OpponentMadeMove
   | GameLogMessage

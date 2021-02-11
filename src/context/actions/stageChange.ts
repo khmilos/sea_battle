@@ -4,7 +4,6 @@ import { popupMessage } from './popupMessanger';
 
 export function play() {
   return (dispatch: Dispatch, state: State) => {
-    console.log('play');
     const { gameStage } = state;
     if (gameStage !== GameStage.ShipsPlacement) return;
     const { shipList } = state.playerGrid;

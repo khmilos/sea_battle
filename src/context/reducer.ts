@@ -5,6 +5,7 @@ import {
   GameStage,
   CurrentMove,
   CLEAR_SHIPS,
+  INIT_APP,
   NEW_SHIP,
   EXPAND_SHIP,
   REMOVE_SHIP,
@@ -23,11 +24,22 @@ function reducer(state: State, action: Action | ThunkAction) {
   // TODO: Peek problem in ContextProvider when action has ThunkAction type
   if (typeof action === 'function') return state; 
   switch (action.type) {
+    case INIT_APP: {
+      const storageState = localStorage.getItem('state');
+      if (storageState) return JSON.parse(storageState);
+      localStorage.setItem('state', JSON.stringify(state));
+      return state;
+    }
     case NEW_SHIP: {
       const { cell } = action.payload;
       const ship: Ship = [cell];
       const shipList = [...state.playerGrid.shipList, ship];
-      return { ...state, playerGrid: { ...state.playerGrid, shipList } };
+      const newState = {
+        ...state,
+        playerGrid: { ...state.playerGrid, shipList }
+      };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState
     }
     case EXPAND_SHIP: {
       const { index, cell } = action.payload;
@@ -37,12 +49,22 @@ function reducer(state: State, action: Action | ThunkAction) {
         ...state.playerGrid.shipList.filter((_, i) => i !== index),
         ship,
       ];
-      return { ...state, playerGrid: { ...state.playerGrid, shipList } };
+      const newState = {
+        ...state,
+        playerGrid: { ...state.playerGrid, shipList }
+      };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case REMOVE_SHIP: {
       const { index } = action.payload;
       const shipList = state.playerGrid.shipList.filter((_, i) => i !== index);
-      return { ...state, playerGrid: { ...state.playerGrid, shipList } };
+      const newState = {
+        ...state,
+        playerGrid: { ...state.playerGrid, shipList }
+      };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case SHRINK_SHIP: {
       const { shipIndex, cellIndex } = action.payload;
@@ -51,7 +73,12 @@ function reducer(state: State, action: Action | ThunkAction) {
         state.playerGrid.shipList[shipIndex].slice(0, cellIndex),
         state.playerGrid.shipList[shipIndex].slice(cellIndex + 1),
       ].filter((x) => x.length > 0);
-      return { ...state, playerGrid: { ...state.playerGrid, shipList } };
+      const newState = {
+        ...state,
+        playerGrid: { ...state.playerGrid, shipList }
+      };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case MERGE_SHIPS: {
       const { indices, cell } = action.payload;
@@ -64,20 +91,34 @@ function reducer(state: State, action: Action | ThunkAction) {
         ...state.playerGrid.shipList.filter((_, i) => !indices.includes(i)),
         ship,
       ];
-      return { ...state, playerGrid: { ...state.playerGrid, shipList } };
+      const newState = {
+        ...state,
+        playerGrid: { ...state.playerGrid, shipList }
+      };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case CLEAR_SHIPS: {
-      return { ...state, playerGrid: { ...state.playerGrid, shipList: [] } };
+      const newState = {
+        ...state,
+        playerGrid: { ...state.playerGrid, shipList: [] }
+      };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case PLAYER_READY: {
-      return {
+      const newState = {
         ...state,
         gameStage: GameStage.Game,
         currentMove: CurrentMove.Player,
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case PLAYER_MADE_MOVE: {
-      return { ...state, currentMove: CurrentMove.Waiting };
+      const newState = { ...state, currentMove: CurrentMove.Waiting };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case PLAYER_MOVE_RESPONSE: {
       const hitList = [...state.opponentGrid.hitList, action.payload.cell]
@@ -89,23 +130,32 @@ function reducer(state: State, action: Action | ThunkAction) {
           opponentGrid: { ...state.opponentGrid, shipList, hitList }
         };
       }
-      return {
+      const newState = {
         ...state,
         currentMove: CurrentMove.Opponent,
         opponentGrid: { ...state.opponentGrid, hitList }
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case OPPONENT_MADE_MOVE: {
       const { cell, isHit } = action.payload;
       const hitList = [...state.playerGrid.hitList, cell]
-      return {
+      const newState = {
         ...state,
         playerGrid: { ...state.playerGrid, hitList },
         currentMove: isHit ? CurrentMove.Opponent : CurrentMove.Player,
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case GAME_LOG_MESSAGE: {
-      return { ...state, gameLogList: [...state.gameLogList, action.payload] };
+      const newState = {
+        ...state,
+        gameLogList: [...state.gameLogList, action.payload]
+      };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
     }
     case POPUP_MESSAGE: {
       return { ...state, popupMessanger: action.payload };
