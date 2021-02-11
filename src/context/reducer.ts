@@ -18,7 +18,9 @@ import {
   GAME_LOG_MESSAGE,
   POPUP_MESSAGE,
   ThunkAction,
+  PLAYER_RESIGN,
 } from './types';
+import { defaultState } from './index';
 
 function reducer(state: State, action: Action | ThunkAction) {
   // TODO: Peek problem in ContextProvider when action has ThunkAction type
@@ -112,6 +114,11 @@ function reducer(state: State, action: Action | ThunkAction) {
         gameStage: GameStage.Game,
         currentMove: CurrentMove.Player,
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
+    }
+    case PLAYER_RESIGN: {
+      const newState = defaultState;
       localStorage.setItem('state', JSON.stringify(newState));
       return newState;
     }

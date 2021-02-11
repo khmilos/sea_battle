@@ -1,4 +1,4 @@
-import { Dispatch, State, GameStage, PLAYER_READY } from '../types';
+import { Dispatch, State, GameStage, PLAYER_READY, PLAYER_RESIGN } from '../types';
 import { isShipPlacementValid } from '../utils';
 import { popupMessage } from './popupMessanger';
 
@@ -13,5 +13,14 @@ export function play() {
     }
     dispatch(popupMessage('Message', 'Game started!'));
     return dispatch({ type: PLAYER_READY });
+  };
+}
+
+export function resign() {
+  return (dispatch: Dispatch, state: State) => {
+    const { gameStage } = state;
+    if (gameStage !== GameStage.Game) return;
+    dispatch(popupMessage('Message', 'You resigned!'));
+    return dispatch({ type: PLAYER_RESIGN, });
   };
 }

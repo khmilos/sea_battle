@@ -2,6 +2,7 @@ import { createContext } from "react";
 import settingsData from "./settings.json";
 import {
   Context,
+  State,
   GameStage,
   CurrentMove,
   Ship,
@@ -44,26 +45,28 @@ const testPlayerGridShipList: Ship[] = [
   [[4, 9]],
 ];
 
-const defaultValue: Context = {
-  state: {
-    gameLogList: [],
-    currentMove: CurrentMove.Neither,
-    gameSettings: {
-      name: "basic",
-      maxSize: 4,
-      shipMetaList: settingsData["basic"],
-    },
-    gameStage: GameStage.ShipsPlacement,
-    playerGrid: {
-      shipList: testPlayerGridShipList,
-      hitList: [],
-    },
-    opponentGrid: {
-      shipList: [],
-      hitList: [],
-    },
-    popupMessanger: null,
+export const defaultState: State = {
+  gameLogList: [],
+  currentMove: CurrentMove.Neither,
+  gameSettings: {
+    name: "basic",
+    maxSize: 4,
+    shipMetaList: settingsData["basic"],
   },
+  gameStage: GameStage.ShipsPlacement,
+  playerGrid: {
+    shipList: testPlayerGridShipList,
+    hitList: [],
+  },
+  opponentGrid: {
+    shipList: [],
+    hitList: [],
+  },
+  popupMessanger: null,
+};
+
+const defaultValue: Context = {
+  state: defaultState,
   dispatch: (action: Action | ThunkAction) => {},
 };
 
