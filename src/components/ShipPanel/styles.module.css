@@ -1,5 +1,5 @@
 .container {
-  padding: 5px;
+  padding: var(--padding-small);
   border-radius: 10px;
   background: var(--background-color-second);
   box-shadow: var(--box-shadow-main);
@@ -8,7 +8,7 @@
 }
 
 .container h2 {
-  margin-bottom: 5px;
+  margin-bottom: var(--margin-small);
   color: var(--text-color-main);
   font-size: var(--text-size-large);
   font-weight: 900;
@@ -16,7 +16,7 @@
 
 .list {
   background: var(--background-color-main);
-  padding: 5px;
+  padding: var(--padding-small);
   border-radius: 5px;
 }
 

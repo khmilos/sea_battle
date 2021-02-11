@@ -5,11 +5,6 @@
   font-size: var(--grid-text-size);
 }
 
-.table caption {
-  font-size: var(--text-size-exlarge);
-  font-weight: 700;
-}
-
 .table th {
   padding: 0;
   min-width: var(--cell-size);
@@ -53,10 +48,4 @@
 .skip {
   border: none !important;
   background: none;
-}
-
-@media screen and (max-width: 992px) {
-  .table caption {
-    display: none;
-  }
 }

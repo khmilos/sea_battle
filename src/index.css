@@ -1,4 +1,8 @@
 :root {
+  --margin-large: 10px;
+  --margin-small: 5px;
+  --padding-large: 10px;
+  --padding-small: 5px;
   --cell-size: 20px;
   --cell-color-water: #F2F7FB;
   --cell-color-ship: #D1CBC6;

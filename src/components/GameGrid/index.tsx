@@ -1,37 +1,27 @@
 import { useContext } from 'react';
 import context from 'context';
-import { addShip, removeShip, gameFlow } from 'context/actions';
-import { Cell, GameStage, GridKey } from 'context/types';
-import { findShip } from 'context/utils';
-import { initGrid, getClass, isMoveHasBeen } from './utils';
+import { Cell, GridKey } from 'context/types';
+import {
+  initGrid,
+  getClass,
+  playerGridHandler,
+  opponentGridHandler,
+  checkIsDisabled,
+} from './utils';
 import styles from './styles.module.css';
 
 function GameGrid({ gridKey }: { gridKey: GridKey }) {
   const { state, dispatch } = useContext(context);
   const { gameStage } = state;
   const { shipList, hitList } = state[gridKey];
-  
-  let handleClick = (cell: Cell) => {};
-  if (gridKey === 'playerGrid' && gameStage === GameStage.ShipsPlacement) {
-    handleClick = (cell: Cell) => {
-      if (findShip(shipList, cell) === -1) return dispatch(addShip(cell));
-      return dispatch(removeShip(cell));
-    }
-  } else if (
-    gridKey === 'opponentGrid' && gameStage === GameStage.Game
-  ) {
-    handleClick = (cell: Cell) => {
-      if (isMoveHasBeen(hitList, cell)) return;
-      dispatch(gameFlow(cell));
-    }
-  }
-
-
   const grid = initGrid(shipList, hitList, gridKey);
-  const isDisabled = (!(
-    (gridKey === 'playerGrid' && gameStage === GameStage.ShipsPlacement)
-    || (gridKey === 'opponentGrid' && gameStage === GameStage.Game)
-  ));
+  const isDisabled = checkIsDisabled(gridKey, gameStage);
+  const handler = (gridKey === 'playerGrid')
+    ? playerGridHandler(shipList)
+    : opponentGridHandler(hitList);
+  const handleClick = (cell: Cell) => {
+    if (handler && handler(cell)) return dispatch(handler(cell));
+  };
   return (
     <table className={styles.table}>
       <tbody>

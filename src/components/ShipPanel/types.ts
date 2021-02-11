@@ -1,5 +1,5 @@
 import { ShipMeta } from 'context/types';
 
-export interface ShipMetaState extends ShipMeta {
+export type ShipMetaState = ShipMeta & {
   current: number;
 }

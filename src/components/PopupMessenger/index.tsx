@@ -1,6 +1,5 @@
 import { ReactNode, useState, useEffect, useContext } from 'react';
 import context from 'context';
-import CloseIcon from 'assets/close.svg';
 import { MessageItem } from './types';
 import styles from './styles.module.css';
 
@@ -34,7 +33,6 @@ function PopupMessanger({ children }: { children: ReactNode }) {
                 clearInterval(message.timeout);
                 setMessageList((prev) => prev.filter((x) => x !== message));
               }}>
-              <img src={CloseIcon} alt='Close' />
             </button>
           </div>
         ))}

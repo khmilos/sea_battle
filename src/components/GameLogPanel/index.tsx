@@ -14,7 +14,7 @@ function GameLogPanel() {
           <thead>
             <tr>
               <th scope='col'>#</th>
-              <th scope='col'>Made by</th>
+              <th scope='col'>By</th>
               <th scope='col'>Cell</th>
               <th scope='col'>Result</th>
             </tr>
@@ -25,7 +25,7 @@ function GameLogPanel() {
                 <th scope='row'>{i + 1}</th>
                 <td>{row.player}</td>
                 <td>
-                  {String.fromCharCode(65 + row.cell[0])}; {row.cell[1] + 1}
+                  {String.fromCharCode(65 + row.cell[0])}{row.cell[1] + 1}
                 </td>
                 <td>{row.isHit ? 'Hit' : 'Miss'}</td>
               </tr>
