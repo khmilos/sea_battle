@@ -7,6 +7,11 @@ import { GameStage } from 'context/types';
 function ControlPanel() {
   const { state, dispatch } = useContext(context);
   const { gameStage } = state;
+  const stageList = [
+    GameStage.Game,
+    GameStage.WaitingOpponent,
+    GameStage.End
+  ];
   return (
     <div className={styles.container}>
       {gameStage === GameStage.ShipsPlacement && (
@@ -25,12 +30,12 @@ function ControlPanel() {
           </button>
         </>
       )}
-      {gameStage === GameStage.Game && (
+      {stageList.includes(gameStage)&& (
         <button
-          className={`${styles.button} ${styles.reset}`}
+          className={`${styles.button} ${styles.play}`}
           onClick={() => dispatch(resign())}
         >
-          Resign
+          Restart
         </button>
       )}
     </div>

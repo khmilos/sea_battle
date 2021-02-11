@@ -8,10 +8,13 @@ import {
   OPPONENT_MADE_MOVE,
   Dispatch,
   State,
+  PLAYER_VICTORY,
+  PLAYER_DEFEAT,
 } from '../types';
-import { findShip } from '../utils';
-import { logMove } from './gameLogs'
+import { findShip, isDefeat } from '../utils';
+import { logMove } from './gameLogs';
 import { getAiMove, putPlayerMove } from 'aiEmulation';
+import { popupMessage } from './popupMessanger';
 
 export function move(cell: Cell): PlayerMadeMove {
   return { type: PLAYER_MADE_MOVE, payload: { cell } };
@@ -31,6 +34,11 @@ export function gameFlow(cell: Cell) {
     const isPlayerHit = putPlayerMove(cell);
     dispatch(moveResponse(cell, isPlayerHit));
     dispatch(logMove('player', cell, isPlayerHit));
+    const { shipList } = state.opponentGrid;
+    if (shipList.length === 20) {
+      dispatch(popupMessage('Message', 'Victory!'));
+      return dispatch({ type: PLAYER_VICTORY });
+    }
     if (!isPlayerHit) {
       const { shipList } = state.playerGrid;
       while (true) {
@@ -39,6 +47,9 @@ export function gameFlow(cell: Cell) {
         dispatch(opponentMove(aiMove, isOpponentHit));
         dispatch(logMove('opponent', aiMove, isOpponentHit));
         if (!isOpponentHit) return;
+        if (isDefeat(state.playerGrid.shipList, state.playerGrid.hitList)) {
+          return dispatch({ type: PLAYER_DEFEAT });
+        }
       }
     }
   };

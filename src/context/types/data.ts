@@ -36,6 +36,7 @@ export enum GameStage {
   ShipsPlacement,
   WaitingOpponent,
   Game,
+  End,
 };
 
 export enum CurrentMove {

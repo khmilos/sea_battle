@@ -6,6 +6,10 @@ export function findShip(shipList: Ship[], cell: Cell) {
   });
 }
 
+export function findHit(hitList: Cell[], cell: Cell) {
+  return hitList.findIndex((hit) => hit[0] === cell[0] && hit[1] === cell[1]);
+}
+
 export function findAdjacentShips(shipList: Ship[], cell: Cell) {
   return [
     findShip(shipList, [cell[0], cell[1] + 1]),
@@ -37,4 +41,17 @@ export function isShipPlacementValid(
     return result && sizeQuantityDict[shipType.size] === shipType.quantity;
   }, true);
   return isValid;
+}
+
+export function isDefeat(shipList: Ship[], hitList: Cell[]) {
+  const result = shipList.find((ship) => {
+    const result = ship.find((cell) => {
+      console.log(cell, findHit(hitList, cell))
+      return findHit(hitList, cell) === -1
+    });
+    console.log(result);
+    return result;
+  })
+  console.log(result);
+  return result;
 }

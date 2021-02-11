@@ -13,6 +13,8 @@ import {
   ClearShips,
   PlayerReady,
   PlayerResign,
+  PlayerVictory,
+  PlayerDefeat,
 } from './actions';
 import {
   GameSettings,
@@ -36,7 +38,9 @@ export type Action = InitApp
   | MergeShips
   | ClearShips
   | PlayerReady
-  | PlayerResign;
+  | PlayerResign
+  | PlayerVictory
+  | PlayerDefeat;
 
 export type ThunkAction = (dispatch: Dispatch, state: State) => void;
 

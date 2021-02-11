@@ -15,6 +15,7 @@
   flex-direction: column;
   margin-top: var(--margin-large);
   padding: var(--padding-large);
+  min-width: 100px;
   background: var(--background-color-second);
   border-radius: 10px;
   box-shadow: var(--box-shadow-main);

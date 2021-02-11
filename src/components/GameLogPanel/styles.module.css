@@ -31,7 +31,7 @@
 }
 
 .table th, .table td {
-  height: 25px;
+  height: 20px;
   background: var(--background-color-main);
   border-left: var(--border-second);
   border-bottom: var(--border-second);

@@ -19,6 +19,8 @@ import {
   POPUP_MESSAGE,
   ThunkAction,
   PLAYER_RESIGN,
+  PLAYER_VICTORY,
+  PLAYER_DEFEAT,
 } from './types';
 import { defaultState } from './index';
 
@@ -119,6 +121,16 @@ function reducer(state: State, action: Action | ThunkAction) {
     }
     case PLAYER_RESIGN: {
       const newState = defaultState;
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
+    }
+    case PLAYER_VICTORY: {
+      const newState = {...state, gameStage: GameStage.End };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
+    }
+    case PLAYER_DEFEAT: {
+      const newState = {...state, gameStage: GameStage.End };
       localStorage.setItem('state', JSON.stringify(newState));
       return newState;
     }

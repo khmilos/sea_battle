@@ -1,4 +1,10 @@
-import { Dispatch, State, GameStage, PLAYER_READY, PLAYER_RESIGN } from '../types';
+import {
+  Dispatch,
+  State,
+  GameStage,
+  PLAYER_READY,
+  PLAYER_RESIGN
+} from '../types';
 import { isShipPlacementValid } from '../utils';
 import { popupMessage } from './popupMessanger';
 
@@ -19,7 +25,7 @@ export function play() {
 export function resign() {
   return (dispatch: Dispatch, state: State) => {
     const { gameStage } = state;
-    if (gameStage !== GameStage.Game) return;
+    if (![GameStage.Game, GameStage.End].includes(gameStage)) return;
     dispatch(popupMessage('Message', 'You resigned!'));
     return dispatch({ type: PLAYER_RESIGN, });
   };

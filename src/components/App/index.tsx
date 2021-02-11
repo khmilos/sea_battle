@@ -12,6 +12,11 @@ function App() {
   const { state, dispatch } = useContext(context);
   const { gameStage } = state;
   useEffect(() => dispatch(initApp()), []);
+  const stageList = [
+    GameStage.Game,
+    GameStage.WaitingOpponent,
+    GameStage.End
+  ];
   return (
     <div className={styles.wrapper}>
       <main className={styles.container}>
@@ -25,7 +30,9 @@ function App() {
         </div>
         <aside className={styles.board}>
           { gameStage === GameStage.ShipsPlacement && <ShipPanel /> }
-          { gameStage === GameStage.Game && <GameLogPanel /> }
+          {stageList.includes(gameStage) && (
+            <GameLogPanel />
+          )}
           <ControlPanel />
         </aside>
       </main>
