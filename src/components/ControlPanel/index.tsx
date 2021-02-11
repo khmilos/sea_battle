@@ -14,13 +14,13 @@ function ControlPanel() {
           <button
             className={`${styles.button} ${styles.play}`}
             onClick={() => dispatch(play())}
-            >
+          >
             Play
           </button>
           <button
             className={`${styles.button} ${styles.reset}`}
             onClick={() => dispatch(clear())}
-            >
+          >
             Reset
           </button>
         </>
