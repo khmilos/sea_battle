@@ -30,7 +30,11 @@ function reducer(state: State, action: Action | ThunkAction) {
   switch (action.type) {
     case INIT_APP: {
       const storageState = localStorage.getItem('state');
-      if (storageState) return JSON.parse(storageState);
+      if (storageState) {
+        const jsonState = JSON.parse(storageState);
+        jsonState.popupMessanger = null;
+        return jsonState;
+      }
       localStorage.setItem('state', JSON.stringify(state));
       return state;
     }
